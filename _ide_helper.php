@@ -1304,7 +1304,7 @@ namespace Illuminate\Support\Facades {
         public static function handle($input, $output = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \CodeFlic\Console\Kernel::handle($input, $output);
+            return \CodeFlix\Console\Kernel::handle($input, $output);
         }
         
         /**
@@ -1318,7 +1318,7 @@ namespace Illuminate\Support\Facades {
         public static function terminate($input, $status)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \CodeFlic\Console\Kernel::terminate($input, $status);
+            \CodeFlix\Console\Kernel::terminate($input, $status);
         }
         
         /**
@@ -1332,7 +1332,7 @@ namespace Illuminate\Support\Facades {
         public static function command($signature, $callback)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \CodeFlic\Console\Kernel::command($signature, $callback);
+            return \CodeFlix\Console\Kernel::command($signature, $callback);
         }
         
         /**
@@ -1345,7 +1345,7 @@ namespace Illuminate\Support\Facades {
         public static function registerCommand($command)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \CodeFlic\Console\Kernel::registerCommand($command);
+            \CodeFlix\Console\Kernel::registerCommand($command);
         }
         
         /**
@@ -1360,7 +1360,7 @@ namespace Illuminate\Support\Facades {
         public static function call($command, $parameters = array(), $outputBuffer = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \CodeFlic\Console\Kernel::call($command, $parameters, $outputBuffer);
+            return \CodeFlix\Console\Kernel::call($command, $parameters, $outputBuffer);
         }
         
         /**
@@ -1374,7 +1374,7 @@ namespace Illuminate\Support\Facades {
         public static function queue($command, $parameters = array())
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \CodeFlic\Console\Kernel::queue($command, $parameters);
+            return \CodeFlix\Console\Kernel::queue($command, $parameters);
         }
         
         /**
@@ -1386,7 +1386,7 @@ namespace Illuminate\Support\Facades {
         public static function all()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \CodeFlic\Console\Kernel::all();
+            return \CodeFlix\Console\Kernel::all();
         }
         
         /**
@@ -1398,7 +1398,7 @@ namespace Illuminate\Support\Facades {
         public static function output()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \CodeFlic\Console\Kernel::output();
+            return \CodeFlix\Console\Kernel::output();
         }
         
         /**
@@ -1410,7 +1410,7 @@ namespace Illuminate\Support\Facades {
         public static function bootstrap()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \CodeFlic\Console\Kernel::bootstrap();
+            \CodeFlix\Console\Kernel::bootstrap();
         }
         
         /**
@@ -1423,7 +1423,7 @@ namespace Illuminate\Support\Facades {
         public static function setArtisan($artisan)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \CodeFlic\Console\Kernel::setArtisan($artisan);
+            \CodeFlix\Console\Kernel::setArtisan($artisan);
         }
          
     }
@@ -1581,7 +1581,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \CodeFlic\User|null 
+         * @return \CodeFlix\Models\User|null 
          * @static 
          */ 
         public static function user()
@@ -1616,7 +1616,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \CodeFlic\User|false 
+         * @return \CodeFlix\Models\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1680,7 +1680,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \CodeFlic\User|false 
+         * @return \CodeFlix\Models\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1727,7 +1727,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \CodeFlic\User 
+         * @return \CodeFlix\Models\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1852,7 +1852,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \CodeFlic\User|null 
+         * @return \CodeFlix\Models\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -1920,7 +1920,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \CodeFlic\User 
+         * @return \CodeFlix\Models\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -3020,86 +3020,6 @@ namespace Illuminate\Support\Facades {
         public static function getQueuedCookies()
         {
             return \Illuminate\Cookie\CookieJar::getQueuedCookies();
-        }
-         
-    }
-
-    class Crypt {
-        
-        /**
-         * Determine if the given key and cipher combination is valid.
-         *
-         * @param string $key
-         * @param string $cipher
-         * @return bool 
-         * @static 
-         */ 
-        public static function supported($key, $cipher)
-        {
-            return \Illuminate\Encryption\Encrypter::supported($key, $cipher);
-        }
-        
-        /**
-         * Encrypt the given value.
-         *
-         * @param mixed $value
-         * @param bool $serialize
-         * @return string 
-         * @throws \Illuminate\Contracts\Encryption\EncryptException
-         * @static 
-         */ 
-        public static function encrypt($value, $serialize = true)
-        {
-            return \Illuminate\Encryption\Encrypter::encrypt($value, $serialize);
-        }
-        
-        /**
-         * Encrypt a string without serialization.
-         *
-         * @param string $value
-         * @return string 
-         * @static 
-         */ 
-        public static function encryptString($value)
-        {
-            return \Illuminate\Encryption\Encrypter::encryptString($value);
-        }
-        
-        /**
-         * Decrypt the given value.
-         *
-         * @param mixed $payload
-         * @param bool $unserialize
-         * @return string 
-         * @throws \Illuminate\Contracts\Encryption\DecryptException
-         * @static 
-         */ 
-        public static function decrypt($payload, $unserialize = true)
-        {
-            return \Illuminate\Encryption\Encrypter::decrypt($payload, $unserialize);
-        }
-        
-        /**
-         * Decrypt the given string without unserialization.
-         *
-         * @param string $payload
-         * @return string 
-         * @static 
-         */ 
-        public static function decryptString($payload)
-        {
-            return \Illuminate\Encryption\Encrypter::decryptString($payload);
-        }
-        
-        /**
-         * Get the encryption key.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getKey()
-        {
-            return \Illuminate\Encryption\Encrypter::getKey();
         }
          
     }
@@ -11611,8 +11531,6 @@ namespace  {
     class Config extends \Illuminate\Support\Facades\Config {}
 
     class Cookie extends \Illuminate\Support\Facades\Cookie {}
-
-    class Crypt extends \Illuminate\Support\Facades\Crypt {}
 
     class DB extends \Illuminate\Support\Facades\DB {}
 
