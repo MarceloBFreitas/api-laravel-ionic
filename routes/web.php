@@ -23,13 +23,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([
     'prefix' => 'admin',
-    'as' => 'admin.',
-    'middleware' => 'can:admin'
-],function(){
+    'as' => 'admin.'],function(){
 
-    Route::get('/', function () {
-        return "Área administrativa";
-    });
+   Route::name('login')->get('login','Admin\Auth\LoginController@showLoginForm');
+   Route::post('login','Admin\Auth\LoginController@login');
+
+
+   Route::group(['middleware' => 'can:admin'],function(){
+
+       Route::get('dashboard',function (){
+           return "Area administrativa";
+       });
+
+       Route::name('logout')->post('logout','Admin\Auth\LoginController@logout');
+   });
 
 });
 
