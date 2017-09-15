@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 
 
-Auth::routes();
+//Auth::routes();
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')
     ->name('password.request');
@@ -45,6 +45,11 @@ Route::group([
        Route::get('dashboard',function (){
            return view('admin.dashboard');
        });
+
+       Route::get('teste',function(){
+           return "outroteste";
+       });
+       Route::resource('users','Admin\UsersController');
 
    });
     Route::name('logout')->post('logout','Admin\Auth\LoginController@logout');
