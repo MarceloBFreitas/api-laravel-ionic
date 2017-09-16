@@ -5,9 +5,15 @@ namespace CodeFlix\Http\Controllers\Admin;
 use CodeFlix\Models\User;
 use Illuminate\Http\Request;
 use CodeFlix\Http\Controllers\Controller;
+use CodeFlix\Forms\UserForm;
+use Kris\LaravelFormBuilder\FormBuilder;
+
 
 class UsersController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +30,14 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(FormBuilder $formBuilder)
     {
-        //
+        $form = $formBuilder->create(UserForm::class, [
+            'method' => 'POST',
+            'url' => route('admin.users.store')
+        ]);
+
+        return view('admin.users.create',['form'=>$form]);
     }
 
     /**
