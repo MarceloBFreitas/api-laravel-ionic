@@ -55,6 +55,3 @@ Route::group([
     Route::name('logout')->post('logout','Admin\Auth\LoginController@logout');
 });
 
-Route::get('/force-login',function(){
-    \Auth::loginUsingId(1);
-});
