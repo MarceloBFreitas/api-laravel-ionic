@@ -78,6 +78,7 @@ class UsersController extends Controller
     {
         //route model binding
 
+
     }
 
     /**
@@ -86,9 +87,15 @@ class UsersController extends Controller
      * @param  \CodeFlix\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user,FormBuilder $formBuilder)
     {
-        //
+        $form = $formBuilder->create(UserForm::class, [
+            'method' => 'PUT',
+            'url' => route('admin.users.update',['user' => $user->id]),
+            'model' => $user
+        ]);
+
+        return view('admin.users.edit',['form'=>$form]);
     }
 
     /**
@@ -98,9 +105,24 @@ class UsersController extends Controller
      * @param  \CodeFlix\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user,FormBuilder $formBuilder)
     {
-        //
+        $form = $formBuilder->create(UserForm::class,[
+            'data' => ['id' => $user->id]
+        ]);
+        if( ! $form->isValid() ){
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
+        }else{
+            $data = array_except($form->getFieldValues(),'password','role'); //tiro do formulario os campos que nao quero
+            $user->fill($data); //esse metodo popula os campos do fillable do model, é do eloquent
+            $user->save();
+            $request->session()->flash('message','Usuário Alterado com Sucesso');
+
+            return redirect()->route('admin.users.index');
+        }
     }
 
     /**
