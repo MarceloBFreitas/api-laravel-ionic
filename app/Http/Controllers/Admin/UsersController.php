@@ -50,7 +50,10 @@ class UsersController extends Controller
     {
         $form = $formBuilder->create(UserForm::class);
         if( ! $form->isValid() ){
-            //redirecionar para a pagina de criação de usuários
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }else{
             $user = new User();
 
