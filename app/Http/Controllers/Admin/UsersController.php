@@ -46,9 +46,20 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormBuilder $formBuilder)
     {
-        //
+        $form = $formBuilder->create(UserForm::class);
+        if( ! $form->isValid() ){
+            //redirecionar para a pagina de criação de usuários
+        }else{
+            $user = new User();
+
+            $data = $form->getFieldValues(); //retorna
+            $data['role'] = User::ROLE_ADMIN;
+            $data['password'] = $user->generatedPassword();
+            User::create($data);
+            return redirect()->route('admin.users.index');
+        }
     }
 
     /**

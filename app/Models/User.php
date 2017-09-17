@@ -36,6 +36,14 @@ class User extends Authenticatable implements TableInterface
     ];
 
 
+    /**
+     * @param null $password
+     * @return string
+     */
+    public function generatedPassword($password=null){
+        return !$password? bcrypt(str_random(8)):bcrypt(str_random($password));
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new meuResetDeSenha($token));
@@ -66,7 +74,7 @@ class User extends Authenticatable implements TableInterface
             case '#':
                 return $this->id;
                 break;
-            case 'nome':
+            case 'Nome':
                 return $this->name;
                 break;
             case 'E-Mail':
