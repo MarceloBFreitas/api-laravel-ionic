@@ -9,7 +9,11 @@
         <div class="row">
            {!! Table::withContents($users->items())->striped()->callback('Ações',function($field,$user){
                     $linkedit = route('admin.users.edit',['user' => $user->id]);
-                    return Button::link(Icon::create('pencil'))->asLinkTo($linkedit);
+                    $linkshowdelete = route('admin.users.show',['user' => $user->id]);
+                    return
+                        Button::link(Icon::create('pencil'))->asLinkTo($linkedit) . '|' .
+                        Button::link(Icon::create('remove'))->asLinkTo($linkshowdelete);
+                    ;
 
             });
            !!}

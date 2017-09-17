@@ -76,9 +76,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        //route model binding
-
-
+        return view('admin.users.show', ['user'=>$user]);
     }
 
     /**
@@ -131,8 +129,11 @@ class UsersController extends Controller
      * @param  \CodeFlix\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user,Request $request)
     {
-        //
+        $user->delete();
+
+        $request->session()->flash('message','Usuário Removido com Sucesso');
+        return redirect()->route('admin.users.index');
     }
 }

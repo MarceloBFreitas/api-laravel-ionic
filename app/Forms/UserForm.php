@@ -16,7 +16,7 @@ class UserForm extends Form
             ])
             ->add('email', 'email',[
                 'label' => 'E-mail',
-                'rules' => "required|max:255|unique:users,email,$id"  //tabela/campo
+                'rules' => "required|max:255|unique:users,email,$id"  //tabela/campo/id que funciona para create e para update
             ]);
     }
 }
