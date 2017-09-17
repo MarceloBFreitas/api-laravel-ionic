@@ -231,6 +231,7 @@ return [
 
         'Table' => Bootstrapper\Facades\Table::class,
         'Icon' => Bootstrapper\Facades\Icon::class,
+        'Alert' => Bootstrapper\Facades\Alert::class,
 
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
 
