@@ -182,6 +182,7 @@ return [
         CodeFlix\Providers\RouteServiceProvider::class,
         CodeFlix\Providers\RepositoryServiceProvider::class,
 
+
     ],
 
     /*

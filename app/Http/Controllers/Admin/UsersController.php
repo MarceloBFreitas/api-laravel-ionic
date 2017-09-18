@@ -3,6 +3,7 @@
 namespace CodeFlix\Http\Controllers\Admin;
 
 use CodeFlix\Models\User;
+use CodeFlix\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use CodeFlix\Http\Controllers\Controller;
 use CodeFlix\Forms\UserForm;
@@ -19,9 +20,17 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $repository;
+
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function index()
     {
-        $users = User::paginate();
+        $users = $this->repository->paginate();
         return view('admin.users.index',['users'=>$users]);
     }
 
@@ -56,14 +65,10 @@ class UsersController extends Controller
                 ->withInput();
         }else{
             $user = new User();
-
             $data = $form->getFieldValues(); //retorna
-            $data['role'] = User::ROLE_ADMIN;
-            $data['password'] = $user->generatedPassword();
-            User::create($data);
 
+            $this->repository->create($data);
             $request->session()->flash('message','usuário criado com Sucesso');
-
             return redirect()->route('admin.users.index');
         }
     }
