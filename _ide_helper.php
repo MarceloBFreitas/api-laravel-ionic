@@ -12714,6 +12714,89 @@ namespace Kris\LaravelFormBuilder\Facades {
  
 }
 
+namespace Jrean\UserVerification\Facades { 
+
+    class UserVerification {
+        
+        /**
+         * Generate and save a verification token for the given user.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @return bool 
+         * @static 
+         */ 
+        public static function generate($user)
+        {
+            return \Jrean\UserVerification\UserVerification::generate($user);
+        }
+        
+        /**
+         * Send by e-mail a link containing the verification token.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return void 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function send($user, $subject = null, $from = null, $name = null)
+        {
+            \Jrean\UserVerification\UserVerification::send($user, $subject, $from, $name);
+        }
+        
+        /**
+         * Queue and send by e-mail a link containing the verification token.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return void 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function sendQueue($user, $subject = null, $from = null, $name = null)
+        {
+            \Jrean\UserVerification\UserVerification::sendQueue($user, $subject, $from, $name);
+        }
+        
+        /**
+         * Send later by e-mail a link containing the verification token.
+         *
+         * @param \DateTime $delay
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return void 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function sendLater($delay, $user, $subject = null, $from = null, $name = null)
+        {
+            \Jrean\UserVerification\UserVerification::sendLater($delay, $user, $subject, $from, $name);
+        }
+        
+        /**
+         * Process the user verification for the given e-mail and token.
+         *
+         * @param string $email
+         * @param string $token
+         * @param string $userTable
+         * @return void 
+         * @static 
+         */ 
+        public static function process($email, $token, $userTable)
+        {
+            \Jrean\UserVerification\UserVerification::process($email, $token, $userTable);
+        }
+         
+    }
+ 
+}
+
 namespace Collective\Html { 
 
     class HtmlFacade {
@@ -15826,6 +15909,8 @@ namespace  {
     class Navigation extends \Bootstrapper\Facades\Navigation {}
 
     class FormBuilder extends \Kris\LaravelFormBuilder\Facades\FormBuilder {}
+
+    class UserVerification extends \Jrean\UserVerification\Facades\UserVerification {}
 
     class Html extends \Collective\Html\HtmlFacade {}
 

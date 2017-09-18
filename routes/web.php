@@ -28,6 +28,9 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
+Route::get('email-verification/error', 'EmailVerificationController@getVerificationError')->name('email-verification.error');
+Route::get('email-verification/check/{token}', 'EmailVerificationController@getVerification')->name('email-verification.check');
+
 
 
 
@@ -41,7 +44,7 @@ Route::group([
    Route::post('login','Admin\Auth\LoginController@login');
 
 
-   Route::group(['middleware' => 'can:admin'],function(){
+   Route::group(['middleware' => ['isVerified','can:admin']],function(){
        Route::get('dashboard',function (){
            return view('admin.dashboard');
        });
