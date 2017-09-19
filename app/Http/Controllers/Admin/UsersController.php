@@ -4,9 +4,11 @@ namespace CodeFlix\Http\Controllers\Admin;
 
 use CodeFlix\Models\User;
 use CodeFlix\Repositories\UserRepository;
+
 use Illuminate\Http\Request;
 use CodeFlix\Http\Controllers\Controller;
 use CodeFlix\Forms\UserForm;
+use CodeFlix\Forms\SenhaForm;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 
@@ -140,5 +142,18 @@ class UsersController extends Controller
 
         $request->session()->flash('message','Usuário Removido com Sucesso');
         return redirect()->route('admin.users.index');
+    }
+
+    public function criaSenha(FormBuilder $formBuilder){
+        $form = $formBuilder->create(SenhaForm::class, [
+            'method' => 'POST',
+            'url' => url('admin/alterar/alteraSenha')
+        ]);
+
+        return view('admin.users.novasenha',['form'=>$form]);
+    }
+
+    public function alteraSenha(){
+
     }
 }

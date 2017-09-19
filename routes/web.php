@@ -49,10 +49,11 @@ Route::group([
            return view('admin.dashboard');
        });
 
-       Route::get('teste',function(){
-           return "outroteste";
-       });
+
        Route::resource('users','Admin\UsersController');
+       Route::get('alterar/senha','Admin\UsersController@criaSenha');
+
+       Route::resource('categorias','Admin\CategoryController');
 
    });
     Route::name('logout')->post('logout','Admin\Auth\LoginController@logout');

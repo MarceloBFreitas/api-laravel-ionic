@@ -19,6 +19,7 @@
             if(Auth::check()){
                 $arraylinks = [
                     ['link' => route('admin.users.index'),'title' => 'Usuários'],
+                    ['link' => route('admin.categorias.index'),'title' => 'Categorias'],
                 ];
                 $menus = Navigation::links($arraylinks);
 
@@ -32,7 +33,11 @@
                                     'linkAttributes' => [
                                         'onclick' => 'event.preventDefault();document.getElementById("formlogout").submit();'
                                     ]
-                                ]
+                                ],
+                                [
+                                    'link' => url('admin/alterar/senha'),
+                                    'title' => "Alterar Senha",
+                                ],
                             ]
                         ],
                 ])->right();
@@ -42,12 +47,15 @@
 
         {!! $navbar !!}
 
-            <?php $formlogout = FormBuilder::plain([
+            <?php
+            $formlogout = FormBuilder::plain([
                 'id' => 'formlogout',
                 'route'=> ['admin.logout'],
                 'method' => 'POST',
                 'style' => 'display:none'
-            ]) ?>
+            ]);
+
+            ?>
 
 
             {!! form($formlogout) !!}
