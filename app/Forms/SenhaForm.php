@@ -10,13 +10,13 @@ class SenhaForm extends Form
     {
         $id = $this->getData('id');
         $this
-            ->add('senha', 'email',[
+            ->add('senha', 'password',[
                 'label' => 'Digite a Senha',
                 'rules' => 'required|max:255'
             ])
-            ->add('repita', 'email',[
+            ->add('repita', 'password',[
                 'label' => 'Repita a Senha',
-                'rules' => "required|max:255"  //tabela/campo/id que funciona para create e para update
+                'rules' => "required|max:255,$id "  //tabela/campo/id que funciona para create e para update
             ]);
     }
 }

@@ -52,6 +52,7 @@ Route::group([
 
        Route::resource('users','Admin\UsersController');
        Route::get('alterar/senha','Admin\UsersController@criaSenha');
+       Route::post('alterar/alteraSenha','Admin\UsersController@alteraSenha');
 
        Route::resource('categorias','Admin\CategoryController');
 

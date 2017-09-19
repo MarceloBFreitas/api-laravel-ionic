@@ -153,7 +153,18 @@ class UsersController extends Controller
         return view('admin.users.novasenha',['form'=>$form]);
     }
 
-    public function alteraSenha(){
-
+    public function alteraSenha(Request $request)
+    {
+        $data = $request->all();
+        if($data['senha']==$data['repita']){
+            $user = \Auth::user();
+            $user->password = bcrypt($data['senha']);
+            $user->save();
+            $request->session()->flash('message','Senha Alterada com Sucesso');
+            return redirect()->route('admin.users.index');
+        }else{
+            $request->session()->flash('alertar','Senhas digitadas não conferem');
+            return redirect()->back();
+        }
     }
 }
